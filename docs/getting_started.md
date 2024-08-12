@@ -52,9 +52,9 @@ You want to make regzbot track a regression you or someone else reported already
 
    The caret ("^") at the end of the line tells regzbot to treat the parent mail (the one you reply to) as the report.
 
- * If the regression was reported to some bug tracker, sent a mail to the regression list that roughly outlines the regression and includes a paragraph that contains something like this:
+ * If the regression was reported to some bug tracker, send a mail to the regression list that roughly outlines the regression and includes a paragraph that contains something like this:
 
-   `#regzbot introduced: v5.13..v5.14-rc1 https://example.com/somewhere/someplace.html`s
+   `#regzbot introduced: v5.13..v5.14-rc1 https://example.com/somewhere/someplace.html`
 
 ### Update properties of a tracked regression
 

@@ -1,9 +1,9 @@
 # Regression tracking bot designed for the Linux kernel
 
-Regzbot is a bot tailored for low-overhead regression tracking in the email
-driven Linux kernel development process. It's actually used in the field, but
-still in a alpha stage: more adjustments are needed to make it better suite the
-its intended purpose.
+Regzbot is a bot tailored for low overhead regression tracking in the email
+driven Linux kernel development process. It's actually being used in the field,
+but still in an alpha stage: further adjustments are needed to make more suitable
+for its intended purpose.
 
 To get an impression how regression tracking with regzbot is performed in
 practice, see the

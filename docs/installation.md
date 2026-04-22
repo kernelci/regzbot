@@ -71,3 +71,14 @@ You can fix issues automatically with these commands:
 ruff format
 ruff check --fix
 ```
+
+## Pre-commit
+
+To run Ruff automatically on each commit, install the dev dependencies and then install the pre-commit hooks:
+
+    pip install -r requirements-dev.txt
+    pre-commit install
+
+You can also run the hooks on all files manually:
+
+    pre-commit run --all-files

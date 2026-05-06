@@ -1,3 +1,29 @@
+Codebase overview
+=================
+
+| Area | Files | Role |
+|------|-------|------|
+| Core + DB | `__init__.py` | Regression model, `GitTree`/`GitBranch`, `ReportThread`, `run()`/`generate_web()`/`report()` |
+| Bot commands | `_rbcmd.py` | Parse and execute `#regzbot` subcommands |
+| CLI | `commandl.py` | argparse-based subcommands |
+| Web export | `export_web.py` | Static HTML generation |
+| Mail reports | `export_mail.py` | Weekly text/mail report layout |
+| CSV export | `export_csv.py` | CSV-oriented export (tests) |
+| Lore ingestion | `_repsources/_lore.py` | NNTP and HTTPS access to lore archives |
+| Tracker sources | `_bugzilla.py`, `_gitlab.py`, `_github.py`, `_generic.py` | Tracker-specific API integrations |
+| Tests | `testing_online.py`, `testing_offline.py`, `testing_trackers.py`, `testdata/*` | Offline/online/tracker tests/expected results |
+
+Report sources (pluggable backends):
+
+| Source | Implementation | Notes |
+|--------|----------------|-------|
+| **lore** (NNTP/HTTPS) | `_repsources/_lore.py` | Primary source; kernel mailing list archives |
+| **bugzilla.kernel.org** | `_repsources/_bugzilla.py` | REST API with API key |
+| **GitLab** | `_repsources/_gitlab.py` | Issue tracker integration |
+| **GitHub** | `_repsources/_github.py` | Issue tracker integration |
+
+Tracker polling logic lives in `_repsources/_trackers.py`.
+
 Sign-off Process
 ================
 

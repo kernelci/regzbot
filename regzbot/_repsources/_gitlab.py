@@ -255,7 +255,10 @@ class GlRepSrc(regzbot._repsources._trackers._repsrc):
 
     def supports_url(self, url_lowered, url_parsed):
         if url_lowered.startswith(self.serverurl):
-            id = url_lowered.removeprefix('%s/-/issues/' % self.serverurl)
+            if 'work_items' in url_lowered:
+                id = url_lowered.removeprefix('%s/-/work_items/' % self.serverurl)
+            else:
+                id = url_lowered.removeprefix('%s/-/issues/' % self.serverurl)
             return id.strip('/')
 
     def updated_threads(self, since):

@@ -52,9 +52,9 @@ You want to make regzbot track a regression you or someone else reported already
 
    The caret ("^") at the end of the line tells regzbot to treat the parent mail (the one you reply to) as the report.
 
- * If the regression was reported to some bug tracker, sent a mail to the regression list that roughly outlines the regression and includes a paragraph that contains something like this:
+ * If the regression was reported to some bug tracker, send a mail to the regression list that roughly outlines the regression and includes a paragraph that contains something like this:
 
-   `#regzbot introduced: v5.13..v5.14-rc1 https://example.com/somewhere/someplace.html`s
+   `#regzbot introduced: v5.13..v5.14-rc1 https://example.com/somewhere/someplace.html`
 
 ### Update properties of a tracked regression
 
@@ -77,9 +77,9 @@ Simply write a reply to the report that uses the 'introduced' command again. Jus
 
 `#regzbot introduced: next-20211006..next-20211008`
 
-Note: to associate the regression to a tree, regzbot will look version tags and commits up in the Git trees for the Linux mainline, stable and next; if it can't a proper match, it might miss-file the regression. Thus stick to the format used in the examples and do not put any spaces before or after the `..`.
+Note: to associate the regression to a tree, regzbot will look version tags and commits up in the Git trees for the Linux mainline, stable and next; if it can't find a proper match, it might miss-file the regression. Thus stick to the format used in the examples and do not put any spaces before or after the `..`.
 
-Reminder: Linux distributors often modify or enhance their Linux based kernels, hence any problems you face with such kernels might be caused by these changes. That's why the Linux kernel developers [mainly care about regression happening with unmodified kernels, which are often called 'upstream kernel', 'official kernel', or 'vanilla'](https://www.kernel.org/doc/html/latest/admin-guide/reporting-issues.html#make-sure-you-re-using-the-upstream-linux-kernel). Regzbot thus focuses on these, too. It thus only understand version tags used by the upstream Linux kernel developers and doesn't handle version numbers like `5.13.12-200.fc34.x86_64` (Fedora) or `5.4.0-12.15-generic` (Ubuntu). If you face a regression with these kernels you should report them to your distributor; alternatively, you can recheck if they occur with a upstream kernel and them report to the Linux kernel developers.
+Reminder: Linux distributors often modify or enhance their Linux based kernels, hence any problems you face with such kernels might be caused by these changes. That's why the Linux kernel developers [mainly care about regression happening with unmodified kernels, which are often called 'upstream kernel', 'official kernel', or 'vanilla'](https://www.kernel.org/doc/html/latest/admin-guide/reporting-issues.html#make-sure-you-re-using-the-upstream-linux-kernel). Regzbot thus focuses on these, too. It thus only understand version tags used by the upstream Linux kernel developers and doesn't handle version numbers like `5.13.12-200.fc34.x86_64` (Fedora) or `5.4.0-12.15-generic` (Ubuntu). If you face a regression with these kernels you should report them to your distributor; alternatively, you can recheck if they occur with a upstream kernel and then report to the Linux kernel developers.
 
 Also remember to read the [Reporting Issues](https://www.kernel.org/doc/html/latest/admin-guide/reporting-issues.html) document carefully, as some ranges are possible to encounter, but might be too vague and thus not be handled appropriately by the developers. One such range would be `v5.13.8..v5.14.4`, as such a regression might be caused by a change in mainline between v5.13 and v5.14, or due to a modification performed between 5.14 and 5.14.4. You thus ideally should rule out which of the two it is.
 
@@ -134,9 +134,9 @@ Both approaches work even if the fix hasn't reached the tree yet where this regr
 
 #### Duplicates
 
-Sometimes multiple people will report the same regressions without knowing about each other. When you notice that, check which of the two seems to be the one which is closer to the root of the problem or even a solution. Let's assume we have two reports already tracked by regzbot we call A and B; A is older, but B is more informative, as crucial developers replied there and discussed a solution. Then it's a good idea to mark A as duplicate of B. You have to options to do that:
+Sometimes multiple people will report the same regressions without knowing about each other. When you notice that, check which of the two seems to be the one which is closer to the root of the problem or even a solution. Let's assume we have two reports already tracked by regzbot we call A and B; A is older, but B is more informative, as crucial developers replied there and discussed a solution. Then it's a good idea to mark A as duplicate of B. You have two options to do that:
 
- * Send this rezbot command to the thread with the report A, where you replace `url` with a link to the B in the [mailing list archives on lore.kernel.org](https://lore.kernel.org/all/):
+ * Send this regzbot command to the thread with the report A, where you replace `url` with a link to the B in the [mailing list archives on lore.kernel.org](https://lore.kernel.org/all/):
 
    `#regzbot dup-of: url`
 
@@ -144,7 +144,7 @@ Sometimes multiple people will report the same regressions without knowing about
 
    `#regzbot dup-of: https://lore.kernel.org/all/30th.anniversary.repost@klaava.Helsinki.FI/`
 
- * Send this rezbot command to the thread with the report B, where you replace `url` with a link to the A in the [mailing list archives on lore.kernel.org](https://lore.kernel.org/all/):
+ * Send this regzbot command to the thread with the report B, where you replace `url` with a link to the A in the [mailing list archives on lore.kernel.org](https://lore.kernel.org/all/):
 
    `#regzbot dup: url`
 

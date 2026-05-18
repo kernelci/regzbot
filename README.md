@@ -18,9 +18,7 @@ To install or develop for regzbot, see the [installation documentation](docs/ins
 
 ## Licensing
 
-Rezbot is available under the APGL 3.0; see the file COPYING for details. If
-you think a more liberal license should be used, let regzbot's author know what
-you'd prefer, as for now it's still quite easy to change the license.
+Rezbot is available under the LGPL 2.1; see the file COPYING for details.
 
 Regzbot was started by Thorsten Leemhuis as part of a project that has received
 funding from the European Union’s Horizon 2020 research and innovation

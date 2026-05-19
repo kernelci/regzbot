@@ -17,13 +17,13 @@ But yes, the first task creates a small burden on reporters. This simply can't b
 
 #regzbot introduced: v5.13..v5.14
 
-Regzbot then considers he mail as a report for a regression that was introduced between Linux 5.13 and 5.14. Instead of a version range it's possible to specify a commit-id here, too, if the change causing the regression is known.
+Regzbot then considers the mail as a report for a regression that was introduced between Linux 5.13 and 5.14. Instead of a version range it's possible to specify a commit-id here, too, if the change causing the regression is known.
 
 ### What regzbot does once it's aware of a regression
 
 After regzbot was told about the regression, it will try to keep track of the fixing progress. To do so, it will record all direct and indirect replies to this mail.
 
-In addition, regzbot will look for mails and commits that link to the report using the mail's 'Message-ID'. Say someone reported a regression in a mail with the ID '4970a940-211b-25d6-edab-21a815313954@example.com', then regzbot will look out for mails and commits with a string like this and consider them realted:
+In addition, regzbot will look for mails and commits that link to the report using the mail's 'Message-ID'. Say someone reported a regression in a mail with the ID '4970a940-211b-25d6-edab-21a815313954@example.com', then regzbot will look out for mails and commits with a string like this and consider them related:
 
 Link: https://lore.kernel.org/r/4970a940-211b-25d6-edab-21a815313954@example.com/
 
@@ -37,7 +37,7 @@ Regzbot is also able to compile a report as pure text and sent them to the Linux
 
 ## Interacting with regzbot
 
-Above outlines the core concept of regzbot. Obviously that's not enough, as users will sometimes forgot to get regzbot involved when reporting a regression; and they might want to update the version range initially specified, for example after they found the change causing the regression using a bisection. Other times the report might turn out to be a duplicate of another report or not a regression at all. And developers might forget linking to the report in the fixes commit message, hence there needs to be another way to tell regzbot a tracked regression got resolved.
+Above outlines the core concept of regzbot. Obviously that's not enough, as users will sometimes forget to get regzbot involved when reporting a regression; and they might want to update the version range initially specified, for example after they found the change causing the regression using a bisection. Other times the report might turn out to be a duplicate of another report or not a regression at all. And developers might forget linking to the report in the fixes commit message, hence there needs to be another way to tell regzbot a tracked regression got resolved.
 
 To cover these and other use-cases it's possible to interact with regzbot via mail, as explained below.
 
@@ -149,7 +149,7 @@ The following 'regzbot commands' are intended mainly for people helping with reg
 
  * `#regzbot poke`
 
-   Regzbot will consider the mail with this command as a 'poke' asking for a progress update from someone involved. It's meant to be used in inquires when a regression seems to become stale, e.g., where there was no mail from a user or developer for a while. Regzbot in its reports and the web UI will show if someone sent a poke to get things rolling again. Apart from this the mail will be handled like it had contained `#regzbot ignore-activity`. It thus won't be counted as an activity and in regzbot web-interface continue to look state until someone replies.
+   Regzbot will consider the mail with this command as a 'poke' asking for a progress update from someone involved. It's meant to be used in inquires when a regression seems to become stale, e.g., where there was no mail from a user or developer for a while. Regzbot in its reports and the web UI will show if someone sent a poke to get things rolling again. Apart from this the mail will be handled like it had contained `#regzbot ignore-activity`. It thus won't be counted as an activity and in regzbot web-interface continue to look stale until someone replies.
 
 ### Commands regzbot accepts everywhere it looks
 
@@ -167,4 +167,4 @@ Regzbot ignores all '#regzbot commands' in threads that are not associated with 
 
  * `#regzbot ^backmonitor: https://lore.kernel.org/r/30th.anniversary.repost@klaava.Helsinki.FI/`
 
-   Makes regzbot start monitoring the parent mail for the linked regressions and ignore the mail that contains this, as it it would contain a '#regzbot ignore-activity'. Useful for mails in the style of 'hey, next time when writing the commit message for a tracked regression fix, please add the link to the report of said regression'. For all other cases better reply to the report with a `#regzbot monitor` command pointing to the related discussion.
+   Makes regzbot start monitoring the parent mail for the linked regressions and ignore the mail that contains this, as it would contain a '#regzbot ignore-activity'. Useful for mails in the style of 'hey, next time when writing the commit message for a tracked regression fix, please add the link to the report of said regression'. For all other cases better reply to the report with a `#regzbot monitor` command pointing to the related discussion.

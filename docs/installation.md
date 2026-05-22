@@ -42,3 +42,23 @@ Now you are ready to run regzbot
     ./regzbot.sh run
 
 It will generate web reports at `~/.cache/regzbot/websites/`
+
+## available commands
+
+| Command | Purpose |
+|---------|---------|
+| `setup` | Initialize database, register sources, first Git tree sync |
+| `run` | Full update cycle (sources → git → web) |
+| `pages` | Regenerate web output only |
+| `report` | Build interactive mail reports (operator sends manually) |
+| `recheck` | Reprocess specific message IDs |
+| `test` | Run offline/online test suites |
+
+## data paths
+
+| Path | Contents |
+|------|----------|
+| `~/.local/share/regzbot/database.db` | SQLite database (tracked regressions, processed message IDs, repository metadata) |
+| `~/.cache/regzbot/gittrees/` | Local Git clones (mainline, next, stable) |
+| `~/.cache/regzbot/websites/` | Generated static HTML output |
+| `~/.config/regzbot/regzbot.cfg` | Configuration file (API keys) |

@@ -3,6 +3,35 @@
 [[_TOC_]]
 
 
+## Background
+
+A **regression** is a change in the kernel that breaks something that previously
+worked — degraded performance, a feature that stops working, or hardware that is
+no longer recognized. Regressions are treated with higher urgency than ordinary
+bugs; see the kernel documentation on
+[reporting regressions](https://docs.kernel.org/admin-guide/reporting-regressions.html) and
+[handling regressions](https://docs.kernel.org/process/handling-regressions.html).
+
+Linux kernel development happens primarily over **email**. A few pieces of this
+infrastructure are relevant to regzbot:
+
+* **Mailing lists** — developers communicate through lists organized by
+  subsystem. `regressions@lists.linux.dev` is specifically for regression
+  reports.
+* **lore.kernel.org** — the public archive of all kernel mailing lists, where
+  every email has a permanent URL.
+* **Message-ID / In-Reply-To / References** — standard email headers that
+  define threading. Regzbot uses these to tie replies, patches, and fixes to the
+  original report.
+* **`Link:` and `Closes:` tags** — conventions in Git commit messages that
+  reference mailing list discussions. Regzbot watches these to detect fixes.
+
+Regzbot tracks three Git trees because fixes arrive at different times:
+**mainline** (`torvalds/linux.git`), **linux-next** (subsystem work before
+mainline), and **stable** (already-shipped kernels). A fix present only in
+linux-next shows as "fix incoming" until it reaches the relevant tree.
+
+
 ## Why and how to make regzbot track a Linux kernel regression
 
 When reporting a Linux kernel regression it is in your interest to make [regzbot](https://gitlab.com/knurd42/regzbot/) aware of the issue, as that ensures the report won't accidentally fall though the cracks; it also makes sure leading developers see the issue via the tracked regression website [or the weekly reports, which are not sent yet, but soon will be].

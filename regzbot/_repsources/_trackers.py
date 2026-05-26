@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: AGPL-3.0
 # Copyright (C) 2023 by Thorsten Leemhuis
-__author__ = 'Thorsten Leemhuis <linux@leemhuis.info>'
+__author__ = "Thorsten Leemhuis <linux@leemhuis.info>"
 
 
 import datetime
@@ -11,21 +11,25 @@ import re
 import regzbot
 
 
-class _activity():
+class _activity:
     def __str__(self):
-        return _describe(self, ('created_at', 'message', 'realname', 'summary', 'username', 'web_url'))
+        return _describe(
+            self, ("created_at", "message", "realname", "summary", "username", "web_url")
+        )
 
 
-class _issue():
+class _issue:
     def __str__(self):
-        return _describe(self, ('created_at', 'message', 'realname', 'state', 'summary', 'username', 'web_url'))
+        return _describe(
+            self, ("created_at", "message", "realname", "state", "summary", "username", "web_url")
+        )
 
     @classmethod
     def activities(cls, *, since=None):
         raise NotImplementedError
 
 
-class _possible_search_result():
+class _possible_search_result:
     def __init__(self, issue_id, pattern, since):
         self.id = issue_id
         self.issue_id = issue_id
@@ -33,7 +37,7 @@ class _possible_search_result():
         self._since = since
 
     def __str__(self):
-        return _describe(self, ('id', ))
+        return _describe(self, ("id",))
 
     def _check_pattern(self, body):
         return bool(re.search(self._pattern, body))
@@ -56,7 +60,9 @@ class _reptrd(regzbot.ReportThread):
     def update(self, since, until, *, actimon=None, triggering_repact=None):
         try:
             for activity in self.activities(since=since, until=until):
-                regzbot._rbcmd.process_activity(activity, actimon=actimon, triggering_repact=triggering_repact)
+                regzbot._rbcmd.process_activity(
+                    activity, actimon=actimon, triggering_repact=triggering_repact
+                )
         except regzbot._rbcmd.RegressionCreatedException:
             # the handled activity contained a #regzbot introduced that created a regression for this issue; during that
             # process all activities (both older and younger) for it will be added by calling this method again, so
@@ -67,8 +73,8 @@ class _reptrd(regzbot.ReportThread):
 class _repsrc(regzbot.ReportSource):
     def update(self):
         # prep
-        if 'until' in regzbot._TESTING:
-            check_started = regzbot._TESTING['until']
+        if "until" in regzbot._TESTING:
+            check_started = regzbot._TESTING["until"]
         else:
             check_started = regzbot.timendate_now()
         if self.lastchked:
@@ -90,7 +96,7 @@ class _repsrc(regzbot.ReportSource):
                 threads_processed.append(updated_thread.id)
 
         # scan any untracked issues that have #regzbot commands in them
-        for searchresult in self.search('#regzbot', since=check_last):
+        for searchresult in self.search("#regzbot", since=check_last):
             if searchresult.issue_id in threads_processed:
                 continue
             thread = self.thread(issue=searchresult.issue)
@@ -111,9 +117,9 @@ def _describe(obj, variable_names):
             value = value_getter.__get__(obj, obj.__class__)
 
         if type(value) is str:
-            value = value.replace('\r', ' ')
-            value = value.replace('\n', ' ')
+            value = value.replace("\r", " ")
+            value = value.replace("\n", " ")
             if len(value) > 79:
-                value = '%s…' % value[0:79]
+                value = "%s…" % value[0:79]
         content.append("'%s': '%s'" % (variable_name, value))
-    return str(obj.__class__) + ' => {' + ', '.join(content) + '}'
+    return str(obj.__class__) + " => {" + ", ".join(content) + "}"

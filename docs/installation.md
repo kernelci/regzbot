@@ -11,6 +11,10 @@ Then activate the environment and install the dependencies:
     source ~/.local/share/regzbot/python-venv/bin/activate
     pip install -r requirements.txt
 
+If you are going to contribute to the project, you should also install the development dependencies:
+
+    pip install -r requirements-dev.txt
+
 ## setting up git trees
 
 Next create the git trees repositories at `~/.cache/regzbot/gittrees/`. You need git checkouts
@@ -42,3 +46,39 @@ Now you are ready to run regzbot
     ./regzbot.sh run
 
 It will generate web reports at `~/.cache/regzbot/websites/`
+
+## Development tools
+
+### Ruff
+
+We use [Ruff](https://github.com/astral-sh/ruff) for fast Python linting and formatting.
+The configuration for this tool can be seen in [ruff.toml](../ruff.toml).
+
+#### Running Ruff Checker
+
+You can check the formatting or linting status by running the following commands:
+
+```bash
+ruff format --check
+ruff check
+```
+
+#### Fixing Issues Automatically
+
+You can fix issues automatically with these commands:
+
+```bash
+ruff format
+ruff check --fix
+```
+
+## Pre-commit
+
+To run Ruff automatically on each commit, install the dev dependencies and then install the pre-commit hooks:
+
+    pip install -r requirements-dev.txt
+    pre-commit install
+
+You can also run the hooks on all files manually:
+
+    pre-commit run --all-files

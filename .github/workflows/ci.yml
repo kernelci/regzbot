@@ -1,0 +1,28 @@
+name: CI for Regzbot
+
+on:
+  pull_request:
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Ruff
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+
+      - name: Check formatting
+        run: ruff format --check regzbot
+
+      - name: Check linting
+        run: ruff check regzbot --output-format=github
